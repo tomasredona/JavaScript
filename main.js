@@ -1,3 +1,5 @@
+const valor_entrada = 2000
+
 alert("Bienvenidos a Cinepolis, presione enter enter para continuar.")
 
 let entrada_usuario
@@ -21,3 +23,15 @@ for (let i = 1; i <= entrada_usuario; i++) {
     prompt(`Seleccione la butaca para la entrada número ${i}`)
 }
 
+let precio_total = valor_entradas(entrada_usuario, valor_entrada)
+
+alert(`Total a pagar: ${precio_total}`)
+
+valor_entradas = (cant_entradas, precio_entrada) => {
+    return cant_entradas * precio_entrada
+}
+
+
+// function valor_entradas(cant_entradas, precio_entrada) {
+// return cant_entradas * precio_entrada
+// }
