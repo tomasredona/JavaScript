@@ -9,6 +9,53 @@
 
 <body>
 
+    <h1>Bienvenidos a Cinepolis</h1>
+
+    <form id="categoria_pelicula" action="">
+
+        <label for="categoria_elegida">¿Qué categoría de película desea ver?</label>
+
+        <select id="categoria_elegida">
+            <option value="Niños">Niños</option>
+            <option value="Adultos">Adultos</option>
+        </select>
+
+        <button type="submit">Enviar</button>
+
+    </form>
+
+    <form id="peliculas_disponibles" style="display: none;">
+
+        <label for="peliculas_elegida">Estas son las películas disponibles</label>
+
+        <select id="peliculas_elegida"></select>
+
+        <button type="submit">Enviar</button>
+
+    </form>
+
+    <form id="entradas" style="display: none;">
+
+        <label>Cuantas entradas quiere comprar?</label>
+
+        <input type="number" id="cantidad_entradas" min="0" max="5">
+
+        <button type="submit">Enviar</button>
+
+    </form>
+
+    <form id="butacas" style="display: none;">
+
+        <label id="butacas_label"></label>
+
+        <button type="submit">Enviar</button>
+
+    </form>
+
+    <div id="compra_final" style="display: none;">
+        <h3>Usted adquirio: </h3>
+        <div id="padre_items"></div>
+    </div>
 
     <script src="main.js"></script>
 

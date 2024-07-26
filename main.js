@@ -1,62 +1,105 @@
-const valor_entrada = 2000
-let peliculas = [
+const valor_entrada = 2000;
+const peliculas = [
     { id: 1, nombre: "El hombre araña", categoria: "Niños" },
     { id: 2, nombre: "Los increíbles", categoria: "Niños" },
     { id: 3, nombre: "Intensamente", categoria: "Niños" },
     { id: 4, nombre: "Mentiras arriesgadas", categoria: "Adultos" },
     { id: 5, nombre: "Heat", categoria: "Adultos" },
-    { id: 6, nombre: "Terminator", categoria: "Adultos" },
-]
+    { id: 6, nombre: "Terminator", categoria: "Adultos" }
+];
 
-alert("Bienvenidos a Cinepolis, presione enter enter para continuar.")
+const valor_entradas = (cant_entradas, precio_entrada) => cant_entradas * precio_entrada;
 
-let entrada_usuario
-const max_entradas = 5
+const max_entradas = 5;
 
-let categoria = prompt("Que categoria de película desea ver, ingrese 1 para niños o 2 para adultos")
+document.getElementById('categoria_pelicula').addEventListener('submit', event => {
+    event.preventDefault();
 
-const pelis_disponibles = peliculas.filter((pelicula) => {
-    if (parseInt(categoria) === 1 && pelicula.categoria === "Niños") {
-        return pelicula
+    const categoria_elegida = document.getElementById("categoria_elegida").value;
+    localStorage.setItem("categoria_elegida", categoria_elegida);
+
+    const pelis_disponibles = peliculas.filter(({ categoria }) => categoria === categoria_elegida);
+
+    const peliculasSelect = document.getElementById('peliculas_elegida');
+    peliculasSelect.innerHTML = '';
+    pelis_disponibles.forEach(({ nombre }) => {
+        const option = document.createElement('option');
+        option.value = nombre;
+        option.textContent = nombre;
+        peliculasSelect.appendChild(option);
+    });
+
+    document.getElementById('peliculas_disponibles').style.display = 'block';
+});
+
+document.getElementById('peliculas_disponibles').addEventListener('submit', event => {
+    event.preventDefault();
+
+    const pelicula_elegida = document.getElementById("peliculas_elegida").value;
+    localStorage.setItem('pelicula_elegida', pelicula_elegida);
+
+    document.getElementById('entradas').style.display = 'block';
+});
+
+document.getElementById('entradas').addEventListener('submit', event => {
+    event.preventDefault();
+
+    const cantidad_entradas = document.getElementById("cantidad_entradas").value;
+    localStorage.setItem('cantidad_entradas', cantidad_entradas);
+
+    const butacasInput = document.getElementById('butacas_label');
+    butacasInput.innerHTML = "<div>Elija las butacas que desea:</div>";
+
+    for (let index = 0; index < cantidad_entradas; index++) {
+        const input = document.createElement('input');
+        input.type = 'number';
+        input.placeholder = `Entrada ${index + 1}`;
+        butacasInput.appendChild(input);
     }
-    else if (parseInt(categoria) === 2 && pelicula.categoria === "Adultos") {
-        return pelicula
-    }
-})
-const pelis_mostrar = pelis_disponibles.map((pelicula) => `\n${pelicula.id}-${pelicula.nombre}`).join('')
 
-alert(`Estas son las películas disponibles: \n${pelis_mostrar}`)
+    document.getElementById('butacas').style.display = 'block';
+});
 
-let numero_pelicula = prompt("Ingrese el número de pelicula que desea ver")
+document.getElementById('butacas').addEventListener('submit', event => {
+    event.preventDefault();
 
-const pelicula_elegida = peliculas.filter((pelicula) => pelicula.id == numero_pelicula)
+    const numeros_butaca = Array.from(document.querySelectorAll('#butacas_label input'))
+        .map(butaca => butaca.value)
+        .filter(value => value > 0);
 
-entrada_usuario = prompt("Ingrese la cantidad de entradas que necesite")
+    localStorage.setItem("numeros_butacas", numeros_butaca);
 
-if (entrada_usuario > max_entradas) {
-    alert(`Excedió el limite de entradas por persona ${max_entradas}`)
-}
-else {
-    alert(`Gracias por su compra! Usted adquirió ${entrada_usuario} entradas para la película ${pelicula_elegida[0].nombre}`)
-}
+    const cantidad_entradas = localStorage.getItem("cantidad_entradas");
+    const precio_total = valor_entradas(cantidad_entradas, valor_entrada);
 
-alert("Seleccione butacas")
+    document.getElementById('compra_final').style.display = 'block';
 
-for (let i = 1; i <= entrada_usuario; i++) {
-
-    prompt(`Seleccione la butaca para la entrada número ${i}`)
-}
-valor_entradas = (cant_entradas, precio_entrada) => {
-    return cant_entradas * precio_entrada
-}
-
-let precio_total = valor_entradas(entrada_usuario, valor_entrada)
-
-alert(`Total a pagar: ${precio_total}`)
+    const padrediv = document.getElementById('padre_items');
+    padrediv.innerHTML = `
+        <div>De la película ${localStorage.getItem("pelicula_elegida")}</div>
+        <div>La cantidad de ${cantidad_entradas} entradas</div>
+        <div>Las butacas ${numeros_butaca}</div>
+        <div>El precio total es de $${precio_total}</div>
+    `;
+});
 
 
 
 
-// function valor_entradas(cant_entradas, precio_entrada) {
-// return cant_entradas * precio_entrada
-// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
