@@ -1,0 +1,11 @@
+{
+  "peliculas": [
+    { "id": 1, "nombre": "El hombre araña", "categoria": "Niños" },
+    { "id": 2, "nombre": "Los increíbles", "categoria": "Niños" },
+    { "id": 3, "nombre": "Intensamente", "categoria": "Niños" },
+    { "id": 4, "nombre": "Mentiras arriesgadas", "categoria": "Adultos" },
+    { "id": 5, "nombre": "Heat", "categoria": "Adultos" },
+    { "id": 6, "nombre": "Terminator", "categoria": "Adultos" }
+  ],
+  "prueba": [{ "id": "hlaaa" }]
+}
